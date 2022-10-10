@@ -5,7 +5,7 @@
 \usepackage[brazil]{babel}
 \usepackage{textcomp}
 \usepackage{float}
-\usepackage{amsfonts, mathtools}
+	\renewcommand{\tt}{\ttfamily}
 
 \usepackage{caption}	
 	\DeclareCaptionLabelSeparator{dash}{ -- }
@@ -36,7 +36,7 @@
 {\normalfont\Large\bfseries}{\thesection}{1em}{}%
 [\vskip-25pt\hskip-90pt\input{barra de seção.tex}]
 
-\usepackage{amsmath, amsthm, amssymb}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, mathtools}
 	\renewcommand{\bar}{\overline}
 	\newcommand{\del}{\partial}
 	\newcommand{\I}{\mathbb{I}}
@@ -49,6 +49,8 @@
 	\renewcommand{\Im}{\mathrm{Im}} % ainda não foi usado
 
 \usepackage{xcolor, listings}
+\lstset{inputpath={Codigos/}}
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}

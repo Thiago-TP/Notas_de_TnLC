@@ -53,131 +53,34 @@
 	\end{align*}
 	%
 	Neste exercício, vamos impor $A^TP + PA = -\I$.
-	Primeiro, a matriz $A$ é dada por
+	Podemos encontrar tal $P$ simplesmente rodando o comando {\tt P = lyap(A', I)} no Matlab, conforme o código abaixo. 
 	%
-	\begin{align*}
-		x_1 := x, \quad
-		x_2 := \dot{x}, \quad 
-		x_3 := \ddot{x} 
-		\implies 
-		\dot{X} = 
-		\begin{pmatrix}
-			\dot{x}_1 \\ \dot{x}_2 \\ \dot{x}_3
-		\end{pmatrix}
-		=	
-		\underbrace{
-		\begin{pmatrix}
-			0 & 1 & 0 \\
-			0 & 0 & 1 \\
-			-8 & -12 & -6
-		\end{pmatrix}
-		}_A
-		\underbrace{
-		\begin{pmatrix}
-			x_1 \\ x_2 \\ x_3
-		\end{pmatrix}
-		}_X,
-		\quad
-		A^T
-		=
-		\begin{pmatrix}
-			0 & 0 & -8 \\
-			1 & 0 & -12 \\
-			0 & 1 & -6
-		\end{pmatrix}.
-	\end{align*}
+	\lstinputlisting[%
+		language=Matlab, 
+		caption=Código Matlab para encontrar $H$ de Lyapunov
+	]{lyapunovLinear.m}
 	%
-	Agora, pondo 
-	\(
-		P 
-		=
-		\begin{pmatrix}
-			\alpha &   a   &   b    \\
-			   a   & \beta &   c    \\
-			   b   &   c   & \gamma
-		\end{pmatrix} 
-	\)
-	, vem
-	%
-	\begin{align*}
-		A^T P = 
-		\begin{pmatrix}
-			   -8b     &   -8c    &  -8\gamma  \\
-			\alpha-12b &   a-12c  & b-12\gamma \\
-			   a-6b    & \beta-6c & c-6\gamma
-		\end{pmatrix},
-		\quad
-		PA =
-		\begin{pmatrix}
-			  -8b    & \alpha-12b &   a-6b    \\
-			  -8c    &   a-12c    & \beta-6c  \\
-			-8\gamma & b-12\gamma & c-6\gamma 
-		\end{pmatrix}
-	\end{align*}
-	%
-	e assim
-	%
-	\begin{align*}
-		A^T P + PA = 
-		\begin{pmatrix}
-			   -16b       &    \alpha-12b-8c    &   a-6b-8\gamma      \\
-			\alpha-12b-8c &       2a-24c        & b-12\gamma+\beta-6c \\
-			a-6b-8\gamma  & b-12\gamma+\beta-6c &    2c-12\gamma
-		\end{pmatrix}
-		=	
-		\begin{pmatrix}
-		    -1&  0 & 0 \\
-			0 & -1 & 0 \\
-			0 &  0 & -1
-		\end{pmatrix}.
-	\end{align*}
-	%
-	É óbvio que $b=1/16$. Substituindo no resto das equações, temos
-	%
-	\begin{align*}
-		\left\{
-			\begin{array}{ll}
-				\alpha       &= 8c + 3/4 \\
-				a            &= 8\gamma + 3/8 \\
-				2a           &= 24c - 1 \\
-				\beta + 1/16 &= 12\gamma + 6c \\
-				2c           &= 12\gamma-1 
-			\end{array}
-		\right.
-		\implies
-		\left\{
-			\begin{array}{ll}
-				\alpha &= 48\gamma - 13/4 \\
-				a &= 8\gamma + 3/8 \\
-				2a &= 144\gamma - 13 \\
-				\beta + 1/16 &= 48\gamma - 3 \\
-				2c &= 12\gamma-1 
-			\end{array}
-		\right.
-		\implies
-		(144-16)\gamma = 13 + \frac{3}{4}
-	\end{align*}
-	%
-	ou seja, $\gamma = 55/128$.
-	Dessa forma, 
+	No código, assumi que 
+	$x_1 := x$, 
+	$x_2 := \dot{x}$, e
+	$x_3 := \ddot{x}$ 
+	formam o vetor de estados 
+	$X = \begin{bmatrix} 
+		 	x_1 & x_2 & x_3
+	 	 \end{bmatrix}^T$.
+ 	Ao final, ficamos com		
 	%
 	\[
 		P = 
-		\begin{pmatrix}
-			2224/128 &  392/128 & 8/128 \\
-			392/128  & 2248/128 & 266/128 \\
-			8/128    &  266/128 & 55/128
-		\end{pmatrix}
-	    =
 	    \frac{1}{128}
 	    \begin{pmatrix}
-	    	2224 &  392 & 8 \\
+	    	224 &  392 & 8 \\
 	    	392  & 2248 & 266 \\
 	    	8    &  266 & 55
-	    \end{pmatrix}	    
+	    \end{pmatrix},	    
 	\]
 	%	
-	e o sistema é estável, como esperado. \\
+	e o sistema é (exponencialmente) estável, como esperado. \\
 
 \noindent
 \textbf{\sffamily Exercício 2 --- solução.} \\
