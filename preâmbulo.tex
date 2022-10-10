@@ -1,0 +1,79 @@
+\hbadness = \maxdimen
+\vbadness = \maxdimen
+
+\usepackage[utf8]{inputenx}
+\usepackage[brazil]{babel}
+\usepackage{textcomp}
+\usepackage{float}
+\usepackage{amsfonts, mathtools}
+
+\usepackage{caption}	
+	\DeclareCaptionLabelSeparator{dash}{ -- }
+	\captionsetup{
+		labelfont = {sf, bf},
+		labelsep = dash,
+		size = footnotesize,
+		width=0.9\textwidth
+	}
+
+\usepackage{graphicx}
+\graphicspath{{Figuras/}}
+
+\usepackage[margin=3cm]{geometry}
+\usepackage{fancyhdr, lastpage}
+\renewcommand{\footrulewidth}{0.5pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\rightmark}
+\fancyhead[RE,LO]{\leftmark}
+\fancyfoot[L]{Técnicas não lineares em Controle}
+\fancyfoot[R]{\thepage/\pageref{LastPage}}
+
+\usepackage{tikz}
+
+\usepackage{titlesec}
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}%
+[\vskip-25pt\hskip-90pt\input{barra de seção.tex}]
+
+\usepackage{amsmath, amsthm, amssymb}
+	\renewcommand{\bar}{\overline}
+	\newcommand{\del}{\partial}
+	\newcommand{\I}{\mathbb{I}}
+	\newcommand{\R}{\mathbb{R}}
+	\newcommand{\e}{\varepsilon}
+	\renewcommand{\leq}{\leqslant}
+	\renewcommand{\geq}{\geqslant}
+	\newcommand{\dis}{\displaystyle}
+	\renewcommand{\Re}{\mathrm{Re}}
+	\renewcommand{\Im}{\mathrm{Im}} % ainda não foi usado
+
+\usepackage{xcolor, listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+% Python
+\lstset{
+	language = Python,
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codepurple},
+	stringstyle=\color{orange!70!black},
+	basicstyle=\linespread{1}\ttfamily\small,
+	numberstyle=\footnotesize,
+	numbers=left,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	tabsize=2,
+	rulecolor=\color{black!30},
+	title=\lstname,
+	escapeinside={\%*}{*)},
+	breaklines=true,
+	breakatwhitespace=true,
+	framextopmargin=2pt,
+	framexbottommargin=2pt,
+	extendedchars=true,
+	inputencoding=utf8,
+	literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ç}{{\c{c}}}1 {â}{{\^a}}1 {õ}{{\~o}}1 {ú}{{\'u}}1 {ó}{{\'o}}1 {í}{{\'i}}1 {Í}{{\'I}}1 
+}
+
+\usepackage[hidelinks]{hyperref}

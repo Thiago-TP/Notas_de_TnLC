@@ -1,0 +1,31 @@
+\documentclass[10pt, a4paper]{book}
+
+\input{preâmbulo.tex}
+
+\begin{document}
+	% capa
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture, overlay]
+		\node at (current page.center) {
+			\includegraphics{Figuras/capa tnlc.pdf}
+		};
+	\end{tikzpicture}
+	
+	\clearpage
+	\pagenumbering{arabic}
+	\include{Anotações/24-06-2022.tex}	
+	\include{Anotações/01-07-2022.tex}
+	\include{Anotações/08-07-2022.tex}
+	\include{Anotações/15-07-2022.tex}
+	\include{Anotações/22-07-2022.tex}
+	\include{Anotações/29-07-2022.tex}
+	\include{Anotações/05-08-2022.tex}
+	%\include{Anotações/12-08-2022.tex} % ?
+	%\include{Anotações/19-08-2022.tex} % inicio de flatness de fato
+	%\include{Anotações/26-08-2022.tex} % aula com o Oniram
+	%\include{Anotações/02-09-2022.tex} % aula amanhã
+	%
+	%\include{Anotações/19-08-2022.tex}
+	
+	
+\end{document}
