@@ -1,0 +1,261 @@
+\section*{08/07/2022 --- Estabilidade local e global}
+\markboth{Estabilidade local e global}{08/07/2022}
+\noindent\textbf{\sffamily Exercício 1.}
+	Encontre $H$ de Lyapunov que comprove a estabilidade do sistema descrito por 
+	%
+	\[
+		\dddot{x} = -6\ddot{x} -12\dot{x} -8x.
+	\]
+	%
+
+\noindent\textbf{\sffamily Exercício 2.}
+	Mostre que a equação de Van der Pol,
+	%
+	\[
+		\ddot{x} = -kx - \alpha(1-x^2)\dot{x},
+		\quad k, \alpha>0,
+	\]
+	%
+	é estável para $x$ suficientemente pequeno. \\
+	%
+
+\noindent\textbf{\sffamily Exercício 3.}
+	Analise a estabilidade de Lyapunov do pêndulo com antrito,
+	%
+	\[
+		\ddot{x} = -\sin x -\alpha \dot{x}, \quad\alpha>0.
+	\]
+	%	
+
+\noindent\textbf{\sffamily Exercício 4.}
+	Analise a estabilidade do sistema descrito por
+	%
+	\[
+		\ddot{\theta} = -2\theta -4\dot{\theta} + \theta^3.
+	\]
+	%	
+
+\noindent\rule{\textwidth}{0.5pt}
+\noindent
+\textbf{\sffamily Exercício 1 --- solução.} \\
+	Existe uma forma geral para encontrar funções/estabilidade de Lyapunov quando o sistema é linear. 
+	Ela consiste em determinar matriz $P>0$ simétrica tal que $H(X) = X^TPX$ é de Lyapunov. 
+	Visto que $\dot{X} = AX$, esse último requerimento se traduz em 
+	%
+	\begin{align*}
+		0 >
+		\dot{H} &= \dot{X}^TPX + X^TP\dot{X} \\
+		        &= (AX)^TPX + X^TP(AX) \\
+		        &= X^TA^TPX + X^TPAX \\
+		        &= X^T(A^TP + PA)X 
+		\iff
+		A^TP + PA < 0.
+	\end{align*}
+	%
+	Neste exercício, vamos impor $A^TP + PA = -\I$.
+	Primeiro, a matriz $A$ é dada por
+	%
+	\begin{align*}
+		x_1 := x, \quad
+		x_2 := \dot{x}, \quad 
+		x_3 := \ddot{x} 
+		\implies 
+		\dot{X} = 
+		\begin{pmatrix}
+			\dot{x}_1 \\ \dot{x}_2 \\ \dot{x}_3
+		\end{pmatrix}
+		=	
+		\underbrace{
+		\begin{pmatrix}
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+			-8 & -12 & -6
+		\end{pmatrix}
+		}_A
+		\underbrace{
+		\begin{pmatrix}
+			x_1 \\ x_2 \\ x_3
+		\end{pmatrix}
+		}_X,
+		\quad
+		A^T
+		=
+		\begin{pmatrix}
+			0 & 0 & -8 \\
+			1 & 0 & -12 \\
+			0 & 1 & -6
+		\end{pmatrix}.
+	\end{align*}
+	%
+	Agora, pondo 
+	\(
+		P 
+		=
+		\begin{pmatrix}
+			\alpha &   a   &   b    \\
+			   a   & \beta &   c    \\
+			   b   &   c   & \gamma
+		\end{pmatrix} 
+	\)
+	, vem
+	%
+	\begin{align*}
+		A^T P = 
+		\begin{pmatrix}
+			   -8b     &   -8c    &  -8\gamma  \\
+			\alpha-12b &   a-12c  & b-12\gamma \\
+			   a-6b    & \beta-6c & c-6\gamma
+		\end{pmatrix},
+		\quad
+		PA =
+		\begin{pmatrix}
+			  -8b    & \alpha-12b &   a-6b    \\
+			  -8c    &   a-12c    & \beta-6c  \\
+			-8\gamma & b-12\gamma & c-6\gamma 
+		\end{pmatrix}
+	\end{align*}
+	%
+	e assim
+	%
+	\begin{align*}
+		A^T P + PA = 
+		\begin{pmatrix}
+			   -16b       &    \alpha-12b-8c    &   a-6b-8\gamma      \\
+			\alpha-12b-8c &       2a-24c        & b-12\gamma+\beta-6c \\
+			a-6b-8\gamma  & b-12\gamma+\beta-6c &    2c-12\gamma
+		\end{pmatrix}
+		=	
+		\begin{pmatrix}
+		    -1&  0 & 0 \\
+			0 & -1 & 0 \\
+			0 &  0 & -1
+		\end{pmatrix}.
+	\end{align*}
+	%
+	É óbvio que $b=1/16$. Substituindo no resto das equações, temos
+	%
+	\begin{align*}
+		\left\{
+			\begin{array}{ll}
+				\alpha       &= 8c + 3/4 \\
+				a            &= 8\gamma + 3/8 \\
+				2a           &= 24c - 1 \\
+				\beta + 1/16 &= 12\gamma + 6c \\
+				2c           &= 12\gamma-1 
+			\end{array}
+		\right.
+		\implies
+		\left\{
+			\begin{array}{ll}
+				\alpha &= 48\gamma - 13/4 \\
+				a &= 8\gamma + 3/8 \\
+				2a &= 144\gamma - 13 \\
+				\beta + 1/16 &= 48\gamma - 3 \\
+				2c &= 12\gamma-1 
+			\end{array}
+		\right.
+		\implies
+		(144-16)\gamma = 13 + \frac{3}{4}
+	\end{align*}
+	%
+	ou seja, $\gamma = 55/128$.
+	Dessa forma, 
+	%
+	\[
+		P = 
+		\begin{pmatrix}
+			2224/128 &  392/128 & 8/128 \\
+			392/128  & 2248/128 & 266/128 \\
+			8/128    &  266/128 & 55/128
+		\end{pmatrix}
+	    =
+	    \frac{1}{128}
+	    \begin{pmatrix}
+	    	2224 &  392 & 8 \\
+	    	392  & 2248 & 266 \\
+	    	8    &  266 & 55
+	    \end{pmatrix}	    
+	\]
+	%	
+	e o sistema é estável, como esperado. \\
+
+\noindent
+\textbf{\sffamily Exercício 2 --- solução.} \\
+	Tomando $H(x) = \frac{kx^2}{2} + \frac{\dot{x}}{2}$, temos 
+	%
+	\begin{align*}
+		\dot{H} &= kx\dot{x} + \dot{x}\ddot{x} \\
+		        &= \dot{x}(kx + \ddot{x}) \\
+		        &= -\alpha\dot{x}^2(1-x^2) \\
+		\implies \dot{H} &\leq 0 \iff |x|\leq 1.
+	\end{align*}
+	%
+	Assim, por mais que $H$ seja positiva definida em $\R$, só podemos garantir estabilidade (assintótica) em $[-1, 1]$. \\
+
+\noindent	
+\textbf{\sffamily Exercício 3 --- solução.} \\
+	Podemos tomar a energia do sistema como candidata à função de Lyapunov:
+	%
+	\begin{align*}
+		H(x) = (1-\cos x) + \frac{\dot{x}^2}{2} \implies
+		\dot{H} &= \dot{x}\sin x + \dot{x}\ddot{x} \\
+		        &= \dot{x}(\sin x + \ddot{x}) \\
+		        &= -\alpha\dot{x}^2. 
+	\end{align*}
+	%
+	A rigor, embora a derivada seja não positiva em $\R$, a estabilidade segundo a $H$ tomada só é provada para $x\in(-\pi/2, \pi/2)$, conjunto onde a função é positiva definida. \\
+	
+\noindent
+\textbf{\sffamily Exercício 4 --- solução.} \\
+	Apenas do termo cúbico em $\theta$, o linearizado tangente da EDO nos diz que o sistema é estável em 
+	$(\theta, \dot{\theta}) = (0,0)$. 
+	Espera-se então que essa convergência seja apenas local; de fato, tomar 
+	%
+	\[
+		H(\theta) = 2\frac{\theta^2}{2} + 
+		            \frac{\dot{\theta}^2}{2} -
+		            \frac{\theta^4}{4}
+	\]
+	%
+	implica em
+	%
+	\begin{align*}
+		\dot{H} &= 2\theta\dot{\theta} +
+		           \dot{\theta}\ddot{\theta} -
+		           \theta^3\dot{\theta} \\
+		        &= \dot{\theta}(2\theta + \ddot{\theta} - \theta^3) \\
+		        &= -4\dot{\theta}^2,
+	\end{align*}
+	%
+	que é não positiva para todo $\theta\in\R$. 
+	Entretanto, como $H$ não é necessariamente positivo definida, essa estabilidade é local. 
+	O retrato de fase da EDO é de fato um tanto estranho (região $[-3,3]\times[-3,3]$).
+	%
+	\begin{figure}[H]\centering
+		\includegraphics[width=7cm]{sistema com 2theta.pdf}
+	\end{figure}
+	%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

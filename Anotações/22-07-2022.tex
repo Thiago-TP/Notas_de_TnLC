@@ -1,0 +1,79 @@
+\section*{22/07/2022 --- Introdução a saídas planas}
+\markboth{Introdução a saídas planas}{22/07/2022}
+\noindent\textbf{\sffamily Exercício 1.}\\
+	Dado uma trajetória polinomial $x(t)$ tal que 
+	%
+	\[
+		x(0) = \dot{x}(0) = \ddot{x}(0) 
+		     = \dot{x}(10)= \ddot{x}(10)
+		\quad\text{ e }\quad
+		x(10) = 1,
+	\]
+	% 
+	encontre $u$ que satisfaça 
+	%
+	\[
+		\ddot{x} = -\sin(x-u).
+	\]
+	%
+	\rule{\textwidth}{0.5pt}\\
+
+\noindent\textbf{\sffamily Exercício 1 --- solução.}\\
+	Exitem $6$ equações acerca de $x(t)$, de foma que este é polinômio de ordem $5$ ou maior. 
+	Tomemos $x$ de grau 5 genérico, i.e., com $c_i$, $0\leq i\leq 5$, tais que
+	%
+	\[
+		x(t) = c_0 + c_1t + c_2t^2 + c_3t^3 + c_4t^4 + c_5t^5
+	\]
+	%
+	satisfaça às equações no enunciado. Substituindo, temos
+	%
+	\begin{align*}
+		\left\{
+			\begin{array}{rl}
+				0 &= x(0)         \\ 
+				0 &= \dot{x}(0)   \\ 
+				0 &= \ddot{x}(0)  \\ 
+				0 &= \dot{x}(10)  \\ 
+				0 &= \ddot{x}(10) \\ 
+				1 &= x(10)     
+			\end{array}
+		\right.
+		\implies
+		\left\{
+			\begin{array}{rl}
+				0 &= c_0 \\ 
+				0 &= c_1 \\ 
+				0 &= c_2 \\ 
+				0 &= 3\cdot 10^2c_3 + 4\cdot 10^3 c_4 + 5\cdot 10^4 c_5 \\ 
+				0 &= 6\cdot 10c_3 + 12\cdot 10^2 c_4 + 20\cdot 10^3 c_5 \\ 
+				1 &= 10^3c_3 + 10^4c_4 + 10^5c_5 
+			\end{array}
+		\right.
+		\implies
+		\begin{pmatrix} 
+			c_0 \\ c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5
+		\end{pmatrix}
+		= 
+		\begin{pmatrix} 
+			0 \\ 0 \\ 0 \\ 1/100 \\ -3/2000 \\ 3/50000
+		\end{pmatrix}.
+	\end{align*}
+	%
+	Conclui-se então que
+	%
+	\[
+		u(t) = \arcsin(\ddot{x}(t)) + x(t)
+		     = \arcsin\left(
+		     	   \frac{6}{100}t - \frac{36}{2000}t^2 + \frac{60}{50000}t^3 
+		       \right)
+		       +
+		       \frac{1}{100}t^3 - \frac{3}{2000}t^4 +\frac{3}{50000}t^5.
+	\]
+	%
+	\begin{figure}[H]\centering
+		\includegraphics{trajetória x.pdf}
+		\caption{Gráfico em escala de $x(t)$ para $0\leq t\leq1$.}
+	\end{figure}
+
+
