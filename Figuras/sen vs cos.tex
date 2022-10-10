@@ -1,0 +1,82 @@
+\documentclass[10pt, tikz, border=2mm]{standalone}
+\usetikzlibrary{arrows, math}
+	\tikzmath{
+		\c = 3.1415;
+		\s = 0.707;
+	}
+
+\begin{document}
+	\begin{tikzpicture}[thick, scale=0.75]
+		%% grágicos
+		\draw [dashed] 
+			(2*\c, 0) node [below] {$\frac{\pi}{2}$} -- (2*\c, 4) -- 
+			(0, 4) node [left] {$1$}
+		;
+		\draw [dash dot]
+			(\c, 4*\s) -- (\c, 0) node [below] {$\frac{\pi}{4}$}
+		;
+		
+		% sin t/4
+		\draw [very thick, teal] plot[variable=\x, domain=0:2*\c, samples=250] 
+			({\x}, {4*sin(\x*45/\c)}) 
+		;
+		% cos t/4
+		\draw [very thick, teal!60] plot[variable=\x, domain=0:2*\c, samples=250] 
+			({\x}, {4*cos(\x*45/\c)}) 
+		;
+		\draw 
+			(\c/2, 1.85) node [teal] {\rotatebox{43}{$\sin x$}}
+			(3*\c/2, 1.8) node [teal!60] {\rotatebox{-43}{$\cos x$}}
+		;
+		\fill (\c, 4*\s) circle (.07);
+		% eixos
+		\draw [latex'-latex'] 
+			(0, 4.75) -- (0,0) -- 
+			(2*\c+1, 0) node [right] {$x$}
+		;
+		%%
+		
+		%% Pêndulo
+		\begin{scope}[scale=2, shift={(5, 2)}]
+			% trajetória
+			\draw [dashed] (-20:1.5+0.12) arc (-20:-79:1.5+0.12);
+			
+			% x
+			\fill [teal!75] (0,0) -- (-45:0.5) arc (-45:-90:0.5);
+			\draw [latex'-latex'] 
+				(-45:0.5) arc (-45:-90:0.5) 
+				node [midway, below] {$\,\, x$}
+			;
+			\draw [thick, dash dot] (0,.4) -- (0, -2);
+			
+			% forças
+			\fill [teal!75] (-45:1.5+0.12) --++ (0,-0.35) arc (-90:-135:0.35);
+			\draw [very thick, black, -latex] 
+				(-45:1.5+0.12) --++ (-135:0.707)
+				node [below] {$mg\sin x$}
+			;		
+			\draw [very thick, black, -latex] 
+				(-45:1.5+0.12) --++ (0, -1)
+				node [below] {$mg$}
+			;
+			
+			% ponto fixo
+			\fill (0,0) circle (.05);
+			
+			% haste e bola
+			\fill [red!70] (-45:1.5+0.12) circle (0.12);
+			\draw [thick] 
+				(0:0) -- (-45:1.5) ++ 
+				(-45:0.12) circle (0.12) ++ (0, 0.1) node [above] {$m$}
+				(-43:1) node [above] {$l$}
+			;
+			
+			% u
+			\draw [-latex', very thick, red!70] 
+				(40:.3) arc (40:380:.3) 
+				node [right] {$u$}
+			;
+		\end{scope}
+		%%
+	\end{tikzpicture}
+\end{document}
